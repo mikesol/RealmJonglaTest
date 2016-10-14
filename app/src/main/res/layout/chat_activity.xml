@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.jongla.realmtest.viewmodel.ChatActivityViewModel" />
+    </data>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/chat_layout"
+                    android:paddingTop="@dimen/activity_vertical_margin"
+                    android:background="@color/white"
+                    tools:context=".ChatActivity">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/chat_list_view"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:scrollbarStyle="outsideOverlay"
+            android:layout_above="@+id/bottomlayout"
+            android:scrollbars="vertical"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_message">
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/bottomlayout"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/chat_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:scrollHorizontally="false"
+                    android:hint="@string/type_your_message"
+                    android:maxLines="4"
+                    android:inputType="textCapSentences"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:paddingLeft="4dp"
+                    app:addTextChangedListener="@{viewModel.messageTextWatcher}"/>
+
+                <ImageView
+                    android:id="@+id/enter_chat1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="13dp"
+                    android:paddingStart="13dp"
+                    android:paddingRight="17dp"
+                    android:paddingEnd="17dp"
+                    android:onClick="@{viewModel.onClickSend}"
+                    android:src="@{viewModel.hasText ? @drawable/ic_chat_send_active : @drawable/ic_chat_send}"
+                    tools:src="@drawable/ic_chat_send_active"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
